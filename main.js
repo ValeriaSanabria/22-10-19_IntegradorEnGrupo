@@ -1,0 +1,26 @@
+"use strict";
+exports.__esModule = true;
+var pregunta_1 = require("./pregunta");
+var examen_1 = require("./examen");
+var examenEspecial_1 = require("./examenEspecial");
+var alumno_1 = require("./alumno");
+var rendicionExamen_1 = require("./rendicionExamen");
+var preguntas1 = new pregunta_1.Pregunta("¿Que edad tiene?", ["20", "25", "30"], 2, 2);
+var preguntas2 = new pregunta_1.Pregunta("¿Sabe programacion?", ["si", "no"], 1, 4);
+var arrayPreguntas = [preguntas1, preguntas2];
+var examen1 = new examen_1.Examen(arrayPreguntas, "Matematica", 10);
+var examen2 = new examen_1.Examen(arrayPreguntas, "Programacion", 10);
+var examenEspecial1 = new examenEspecial_1.ExamenEspecial(arrayPreguntas, "Especial", 10, -5);
+var respuestasExamen1 = [2];
+var respuestasExamen2 = [1];
+var respuestasExamenEspecial1 = [7];
+var rendicionDeExamen1 = new rendicionExamen_1.RendicionDeExamen(examen1, respuestasExamen1);
+var rendicionDeExamen2 = new rendicionExamen_1.RendicionDeExamen(examen2, respuestasExamen2);
+var rendicionDeExamenEspecial = new rendicionExamen_1.RendicionDeExamen(examenEspecial1, respuestasExamenEspecial1);
+var arrayExamenes1 = [rendicionDeExamen1];
+var arrayExamenes2 = [rendicionDeExamen2];
+var arrayExamenes3 = [rendicionDeExamenEspecial];
+var alumno1 = new alumno_1.Alumno(arrayExamenes1, "Ramiro", 18000);
+/* console.log(examen1.equals(preguntas1)); */
+examenEspecial1.examenEspecial("comedia", 10, -2);
+console.log(alumno1.getNombre());
