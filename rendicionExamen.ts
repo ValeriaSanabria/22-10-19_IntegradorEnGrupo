@@ -4,7 +4,6 @@ import { Examen } from "./examen";
 export class RendicionDeExamen {
     protected examen: Examen;
     protected respuestas: number[];
-    static respuestas: any;
 
     constructor(pExamen: Examen, pRespuestas: number[]) {
         this.examen = pExamen;
@@ -19,26 +18,29 @@ export class RendicionDeExamen {
         }
     }
 
-    protected getExamen(): Examen {
+    public getExamen(): Examen {
         return this.examen;
     }
 
     public estaAprobado(): boolean {
-        let aprobado = true
-        for (let i: number = 0; i < this.respuestas.length; i++) {
-            if (this.respuestas[i] == 6){
-                return aprobado = true;
+        var examen = this.getExamen();
+        var respuestas = this.respuestas;
+
+        var puntos = 0;
+        
+        var preguntas = examen.getPreguntas();
+        var puntajeAprobacion = examen.getPuntajeAprobacion();
+
+        for (let i: number = 0; i < preguntas.length; i++) {
+            if (preguntas[i].esCorrecta(respuestas[i])) {
+                puntos = puntos + preguntas[i].getPuntaje();
             }
         }
-        return false
-    }
-/*     public estaAprobado(): boolean {
-        if (Alumno.rendirExamen() === true) {
-            console.log(`El alumno aprobó el examen`)
+
+        if (puntos >= puntajeAprobacion) {
             return true;
         } else {
-            console.log(`El alumno desaprobó el examen`)
             return false;
         }
-    } */
+    }
 }
