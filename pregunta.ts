@@ -4,18 +4,17 @@ export class Pregunta {
     protected opcionCorrecta: number;
     protected puntaje: number;
 
-    constructor(pConsigna: string, pOpciones: string[], pOpcionCorrecta: number, pPuntaje: number) {
+    constructor(pConsigna: string, pPuntaje: number) {
         this.consigna = pConsigna;
-        this.opciones = pOpciones;
-        this.opcionCorrecta = pOpcionCorrecta;
         this.puntaje = pPuntaje;
     }
 
-    public pregunta(consigna: string, puntaje: number): any {
-        console.log(`La pregunta es ${consigna} y vale ${puntaje} puntos`);
-    }
-
     public addOpcion(opcion: string): void {
+        for (let i: number = 0; i < this.opciones.length; i++) {
+            if (this.opciones[i] === opcion) {
+                return;
+            }
+        }
         this.opciones.push(opcion);
     }
 
@@ -33,5 +32,9 @@ export class Pregunta {
 
     public getPuntaje(): number {
         return this.puntaje;
+    }
+
+    public getConsigna(): string {
+        return this.consigna;
     }
 }

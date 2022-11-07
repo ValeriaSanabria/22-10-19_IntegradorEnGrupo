@@ -6,8 +6,8 @@ export class Alumno {
     private nombre: string;
     private dni: number;
 
-    constructor(pExamenesRendidos: RendicionDeExamen[], pNombre: string, pDni: number) {
-        this.examenesRendidos = pExamenesRendidos;
+    constructor(pNombre: string, pDni: number) {
+        this.examenesRendidos = [];
         this.nombre = pNombre;
         this.dni = pDni;
     }
@@ -25,10 +25,15 @@ export class Alumno {
         return this.dni;
     }
 
-   /* public rendirExamen(examen: Examen, respuestas: number[]): boolean {
-        for (let i: number = 0; i < respuestas.length; i++) {
-            if (RendicionDeExamen.getExamen() ==  examen) && (respuestas[i] === RendicionDeExamen.respuestas[i]) {
-
+    public rendirExamen(examen: Examen, respuestas: number[]): boolean {
+        for (let i: number = 0; i < this.examenesRendidos.length; i++) {
+            if (this.examenesRendidos[i].getExamen().getTema() === examen.getTema()) {
+                return false;
+            }
         }
-    } */
+
+        let rendicionExamen = new RendicionDeExamen(examen, respuestas);
+        this.examenesRendidos.push(rendicionExamen);
+        return true;
+    }
 }

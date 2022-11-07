@@ -5,17 +5,18 @@ export class Examen {
     protected tema: string;
     protected puntajeAprobacion: number;
 
-    constructor(pPreguntas: Pregunta[], pTema: string, pPuntaje: number) {
-        this.preguntas = pPreguntas;
+    constructor(pTema: string, pPuntaje: number) {
+        this.preguntas = [];
         this.tema = pTema;
         this.puntajeAprobacion = pPuntaje;
     }
 
-    public examen(tema: string, puntajeAprobacion: number): any {
-        console.log(`El tema ${tema} se aprueba con ${puntajeAprobacion}`);
-    }
-
     public addPregunta(pregunta: Pregunta): void {
+        for (let i: number = 0; i < this.preguntas.length; i++) {
+            if (this.preguntas[i].getConsigna() === pregunta.getConsigna()) {
+                return;
+            }
+        }
         this.preguntas.push(pregunta);
     }
 
@@ -23,7 +24,7 @@ export class Examen {
         let encontrado = false;
         for (let i: number = 0; i < this.preguntas.length; i++) {
             if (o[i] === this.preguntas[i]) {
-            encontrado = true;
+                encontrado = true;
             }
         }
         if (encontrado === true) {
@@ -31,6 +32,14 @@ export class Examen {
         } else {
             return false;
         }
+    }
+
+    public getPuntajeAprobacion(): number {
+        return this.puntajeAprobacion;
+    }
+
+    public getPreguntas(): Pregunta[] {
+        return this.preguntas;
     }
 
     public getTema(): string {
